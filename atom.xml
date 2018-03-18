@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-18T08:06:06.876Z</updated>
+  <updated>2018-03-18T09:32:07.084Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo开通</title>
+    <link href="http://yoursite.com/2018/03/18/hexo%E5%BC%80%E9%80%9A/"/>
+    <id>http://yoursite.com/2018/03/18/hexo开通/</id>
+    <published>2018-03-18T09:29:47.000Z</published>
+    <updated>2018-03-18T09:32:07.084Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>，在<!--more--><p>##开通hexo<br><em>markdown aha!</em></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;，在&lt;!--more--&gt;
+&lt;p&gt;##开通hexo&lt;br&gt;&lt;em&gt;markdown aha!&lt;/em&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="http://yoursite.com/categories/blog/"/>
+    
+    
+      <category term="flag" scheme="http://yoursite.com/tags/flag/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
