@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小小屋" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1 Python 字符串的 CRUD 操作1.1 创建字符串字符串是 Python 中最常用的数据类型。我们可以使用引号(‘或”)来创建字符串，或使用三引号来创建字符串文本段落（允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符）。">
+<meta name="keywords" content="python,基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python字符串">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/python字符串/index.html">
+<meta property="og:site_name" content="小小屋">
+<meta property="og:description" content="1 Python 字符串的 CRUD 操作1.1 创建字符串字符串是 Python 中最常用的数据类型。我们可以使用引号(‘或”)来创建字符串，或使用三引号来创建字符串文本段落（允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-20T06:05:22.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python字符串">
+<meta name="twitter:description" content="1 Python 字符串的 CRUD 操作1.1 创建字符串字符串是 Python 中最常用的数据类型。我们可以使用引号(‘或”)来创建字符串，或使用三引号来创建字符串文本段落（允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符）。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/python字符串/"/>
+
+
+
+
+
+  <title>python字符串 | 小小屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/python字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JayJZ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oyvgzaycw.bkt.clouddn.com/23498821_1911440002505746_3982309632654704640_n.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python字符串</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T14:03:36+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/20/python字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/20/python字符串/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7,149
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  33
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1 Python 字符串的 CRUD 操作<br>1.1 创建字符串<br>字符串是 Python 中最常用的数据类型。我们可以使用引号(‘或”)来创建字符串，或使用三引号来创建字符串文本段落（允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符）。<br><a id="more"></a><br>创建字符串很简单，只要为变量分配一个值即可。例如：</p>
+<p>str1 = ‘Hello World!’<br>str2 = “藕丝空间”<br>str3 = ‘’’<br>       藕丝空间，编程我们是认真的！<br>       你会编程吗？<br>       白日依山尽，<br>       黄河入河流，<br>       欲穷千里目，<br>       更上一层楼。<br>       ‘’’<br>print(str1, str2)<br>print(str3)<br>Hello World! 藕丝空间</p>
+<pre><code>藕丝空间，编程我们是认真的！
+你会编程吗？
+白日依山尽，
+黄河入河流，
+欲穷千里目，
+更上一层楼。
+</code></pre><p>1.2 访问字符串中的值<br>Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。</p>
+<p>Python 访问子字符串，可以使用方括号来截取字符串，如下实例：</p>
+<p>str1 = ‘Hello World!’<br>str2 = “藕丝空间”<br>print(str1, str2)<br>print(‘str1[0]: ‘, str1[0])<br>print(‘str1[:-1]: ‘, str1[:-1])<br>print(‘str1[-6:-1]: ‘, str1[-6:-1])<br>print(‘str1[1:6:2]: ‘, str1[1:6:2])<br>print(‘str1[-1:-6:-2]: ‘, str1[-1:-6:-2])<br>print(‘str2[1:3]’, str2[1:3])<br>Hello World! 藕丝空间<br>str1[0]:  H<br>str1[:-1]:  Hello World<br>str1[-6:-1]:  World<br>str1[1:6:2]:  el<br>str1[-1:-6:-2]:  !lo<br>str2[1:3] 丝空<br>1.3 字符串更新<br>可以通过切片截取字符串的一部分并与其他字段拼接，如下实例：</p>
+<p>str1 = ‘Hello World!’<br>str2 = “藕丝空间”</p>
+<p>print (“已更新字符串 : “, str1[:6] + str2)<br>已更新字符串 :  Hello 藕丝空间<br>1.4 删除字符串<br>str1 = ‘Hello World!’<br>str2 = “藕丝空间”</p>
+<p>del str1, str2</p>
+<h1 id="print-str1"><a href="#print-str1" class="headerlink" title="print(str1)"></a>print(str1)</h1><h2 id="print-str2"><a href="#print-str2" class="headerlink" title="print(str2)"></a>print(str2)</h2><p>NameError                                 Traceback (most recent call last)</p>
+<p> in ()<br>      4 del str1, str2<br>      5 # print(str1)<br>—-&gt; 6 print(str2)</p>
+<p>NameError: name ‘str2’ is not defined<br>2 字符串运算符<br>2.1 +<br>字符串连接</p>
+<p>str1 = ‘Hello ‘<br>str2 = “藕丝空间”<br>print(str1+str2)<br>Hello 藕丝空间<br>2.2 *<br>重复输出字符串</p>
+<p>str2 = “藕丝空间”<br>print(str2<em>2)<br>print(str2</em>3)<br>藕丝空间藕丝空间<br>藕丝空间藕丝空间藕丝空间<br>2.3 [ ]<br>通过索引获取字符串中字符</p>
+<p>以字符串 abcdef 为例。分别列出了使用正索引和负索引来定位字符的情况。</p>
+<p>001.png</p>
+<p>str1 = ‘Hello World!’<br>str2 = “藕丝空间”</p>
+<p>print(‘str1[0]: ‘, str1[0])<br>print(‘str1[:-1]: ‘, str1[:-1])<br>print(‘str1[-6:-1]: ‘, str1[-6:-1])<br>print(‘str1[1:6:2]: ‘, str1[1:6:2])<br>print(‘str1[-1:-6:-2]: ‘, str1[-1:-6:-2])<br>print(‘str2[1:3]’, str2[1:3])<br>str1[0]:  H<br>str1[:-1]:  Hello World<br>str1[-6:-1]:  World<br>str1[1:6:2]:  el<br>str1[-1:-6:-2]:  !lo<br>str2[1:3] 丝空<br>2.4 in、not in<br>in 成员运算符 - 如果字符串中包含给定的字符返回 True。<br>not in 成员运算符 - 如果字符串中不包含给定的字符返回 True。<br>str1 = ‘Hello World!’<br>str2 = “藕丝空间”</p>
+<p>print(‘Hello’ in str1)<br>print(‘Hello’ in str2)<br>print(‘Hello’ not in str1)<br>print(‘Hello’ not in str2)<br>True<br>False<br>False<br>True<br>2.5 r/R<br>原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 原始字符串除在字符串的第一个引号前加上字母 r（可以大小写）以外，与普通字符串有着几乎完全相同的语法。</p>
+<p>print(‘\n’)<br>print(r’\n’)<br>print(‘\t’)<br>print(R’\t’)<br>\n</p>
+<p>\t<br>Python转义字符<br>在需要在字符中使用特殊字符时，python用反斜杠()转义字符。如下表：</p>
+<p>转义字符    描述<br>(在行尾时)    续行符<br>\    反斜杠符号<br>\’    单引号<br>“    双引号<br>\a    响铃<br>\b    退格(Backspace)<br>\e    转义<br>\000    空<br>\n    换行<br>\v    纵向制表符<br>\t    横向制表符<br>\r    回车<br>\f    换页<br>\oyy    八进制数，yy代表的字符，例如：\o12代表换行<br>\xyy    十六进制数，yy代表的字符，例如：\x0a代表换行<br>\other    其它的字符以普通格式输出<br>3 格式化字符串<br>3.1 使用字符串格式符 %s<br>Python 支持格式化字符串的输出 。尽管这样可能会用到非常复杂的表达式，但最基本的用法是将一个值插入到一个有字符串格式符 %s 的字符串中。</p>
+<p>在 Python 中，字符串格式化使用与 C 中 sprintf 函数一样的语法。</p>
+<p>3.1.1 使用 %s 或 %r 格式化字符串<br>%s 字符串 (采用str()的显示)<br>%r 字符串 (采用repr()的显示)<br>print(“I’m %s. I’m %d year old” % (‘Tom’, 30))<br>print(“I’m %r. I’m %d year old” % (ord(‘H’), 30))<br>print(“I’m %s. I’m %d year old” % (chr(ord(‘H’)), 30))<br>print(“repr() 显示引号: %r; str() 不显示: %s” % (‘test1’, ‘test2’))<br>I’m Tom. I’m 30 year old<br>I’m 72. I’m 30 year old<br>I’m H. I’m 30 year old<br>repr() 显示引号: ‘test1’; str() 不显示: test2<br>3.1.2 使用 %c 格式化单个字符及其ASCII码<br>print(“I’m %c. I’m %d year old” % (ord(‘H’), 30))<br>print(“I’m %c. I’m %d year old” % (ord(‘t’), 30))<br>print(“ord(‘t’) 的值是 “, ord(‘t’))<br>I’m H. I’m 30 year old<br>I’m t. I’m 30 year old<br>ord(‘t’) 的值是  116<br>3.1.3 其它格式<br>%b 二进制整数，这种格式不支持使用 % 来格式化字符串<br>%d 十进制整数<br>%i 十进制整数<br>%o 八进制整数<br>%x 十六进制整数<br>%e 指数 (基底写为e)<br>%E 指数 (基底写为E)<br>%f 浮点数<br>%F 浮点数，与上相同<br>%g 指数(e)或浮点数 (根据显示长度)<br>%G 指数(E)或浮点数 (根据显示长度)<br>print(“I’m %s. I’m %d year old” % (‘十进制’, 30))<br>print(“I’m %s. I’m %i year old” % (‘十进制’, 30))<br>print(“I’m %s. I’m %o year old” % (‘八进制’, 30))<br>print(“I’m %s. I’m %x year old” % (‘十六进制’, 30))<br>print(“I’m %s. I’m %e year old” % (‘指数’, 30))<br>print(“I’m %s. I’m %E year old” % (‘指数’, 30))<br>print(“I’m %s. I’m %f year old” % (‘浮点数’, 30))<br>print(“I’m %s. I’m %f year old” % (‘浮点数’, 30))<br>print(“I’m %s. I’m %F year old” % (‘浮点数’, 30))<br>print(“I’m %s. I’m %g year old” % (‘Tom’, 30.00000))<br>print(“I’m %s. I’m %G year old” % (‘Tom’, 30.00000))<br>print(“I’m %s. I’m %g year old” % (‘Tom’, 3.000000E+01))<br>print(“I’m %s. I’m %G year old” % (‘Tom’, 3.000000e+01))<br>I’m 十进制. I’m 30 year old<br>I’m 十进制. I’m 30 year old<br>I’m 八进制. I’m 36 year old<br>I’m 十六进制. I’m 1e year old<br>I’m 指数. I’m 3.000000e+01 year old<br>I’m 指数. I’m 3.000000E+01 year old<br>I’m 浮点数. I’m 30.000000 year old<br>I’m 浮点数. I’m 30.000000 year old<br>I’m Tom. I’m 30 year old<br>I’m Tom. I’m 30 year old<br>I’m Tom. I’m 30 year old<br>I’m Tom. I’m 30 year old<br>3.1.4 更复杂的控制<br>%[(name)][flags][width].[precision] - (name): 命名,用于字典控制赋值 - flags: 可以有+,-。+表示右对齐（默认）。-表示左对齐。’ ‘为一个空格，用来填充字符。0表示使用0填充数字。 - width: 显示宽度,总长度,会补齐空格. - precision: 表示小数点后精度.</p>
+<p>使用字典来赋值</p>
+<p>print(“I’m %(name)s. I’m %(age)d year old” % {‘name’: ‘十进制’, ‘age’: 30})<br>I’m 十进制. I’m 30 year old<br>对齐及填充</p>
+<p>print(“I’m %6s. I’m %06d year old” % (‘整数’, 30)) # 字符串默认右对齐，数字显示 6 位，位数不够，用 0 补齐。<br>print(“I’m %-10s. I’m %.10f year old” % (‘浮点数’, 30))# 字符串左对齐，浮点数显示 10 位小数<br>print(“I’m %-10s. I’m %10.2f year old” % (‘浮点数’, 30))# 字符串左对齐，浮点数显示  2 位小数，默认右对齐。<br>print(“I’m %-10s. I’m %10.10f year old” % (‘浮点数’, 30))# 字符串左对齐，浮点数显示 10 位小数，小数点精度可以突破显示宽度限制。<br>I’m     整数. I’m 000030 year old<br>I’m 浮点数       . I’m 30.0000000000 year old<br>I’m 浮点数       . I’m      30.00 year old<br>I’m 浮点数       . I’m 30.0000000000 year old<br>3.2 使用格式化字符串的函数 str.format()<br>Python2.6 开始，新增了一种格式化字符串的函数 str.format()，它增强了字符串格式化的功能。</p>
+<p>基本语法是通过 {} 和 : 来代替以前的 % 。</p>
+<p>3.2.1 按位置访问参数<br>print(‘{}, {}, {}’.format(‘a’, ‘b’, ‘c’)) # 默认从左到右顺序，按位置赋值，占位符要和元组的长度一致<br>print(‘{0}, {1}, {2}’.format(‘a’, ‘b’, ‘c’))<br>print(‘{2}, {1}, {0}’.format(‘a’, ‘b’, ‘c’))<br>print(‘{2}, {1}, {0}’.format(<em>‘abc’) ) # 通过 </em> 进行解包<br>print(‘{0}{1}{0}’.format(‘藕丝’, ‘cad’)) # 位置参数可重复<br>a, b, c<br>a, b, c<br>c, b, a<br>c, b, a<br>藕丝cad藕丝<br>3.2.2 按名称访问参数<br>print(‘坐标: {latitude}, {longitude}’.format(latitude=’37.24N’, longitude=’-115.81W’)) # latitude 纬度， longitude 经度</p>
+<p>coord = {‘latitude’: ‘37.24N’, ‘longitude’: ‘-115.81W’}<br>print(‘坐标: {latitude}, {longitude}’.format(<strong>coord)) # </strong> 表示是字典变量<br>坐标: 37.24N, -115.81W<br>坐标: 37.24N, -115.81W<br>3.2.3 访问参数的属性<br>c = 3-5j   # Python 中一切皆对象，复数具有“real（实部）”和“imag（虚部）”两个属性。<br>(‘The complex number {0} is formed from the real part {0.real} ‘<br> ‘and the imaginary part {0.imag}.’).format(c)<br>‘The complex number (3-5j) is formed from the real part 3.0 and the imaginary part -5.0.’<br>3.2.4 按索引访问参数<br>coord = (3, 5)<br>‘X: {0[0]};  Y: {0[1]}’.format(coord)<br>‘X: 3;  Y: 5’<br>3.2.5 替代 %s 和 %r<br>“repr() shows quotes: {!r}; str() doesn’t: {!s}”.format(‘test1’, ‘test2’)<br>“repr() shows quotes: ‘test1’; str() doesn’t: test2”<br>3.2.6 对齐文本并指定宽度<br>‘{:&lt;30}’.format(‘左对齐’)<br>‘左对齐                           ‘<br>‘{:&gt;30}’.format(‘右对齐’)<br>‘                           右对齐’<br>‘{:^30}’.format(‘居中’)<br>‘              居中              ‘<br>‘{:<em>^30}’.format(‘居中’) # 使用 </em> 填充<br>‘<strong><strong><strong>**</strong></strong></strong>居中<strong><strong><strong>**</strong></strong></strong>‘<br>3.2.7 替换％+ f，％-f和％f<br>‘{:+f}; {:+f}’.format(3.14, -3.14) # 带符号<br>‘+3.140000; -3.140000’<br>‘{: f}; {: f}’.format(3.14, -3.14) # 不显示正号，但保留一个空格位置<br>‘ 3.140000; -3.140000’<br>‘{:-f}; {:-f}’.format(3.14, -3.14) # 与 ‘{:f}; {:f}’ 作用相同<br>‘3.140000; -3.140000’<br>‘{:10f}; {:2f}’.format(3.14, -3.14) #  设置字符串的总宽度，如果当前宽度大于设置的总宽度，则显示当前宽度。<br>‘  3.140000; -3.140000’<br>‘{:10.1f}; {:.3f}’.format(3.14, -3.14) # 设置小数点的宽度<br>‘       3.1; -3.140’<br>3.2.8 替换％x和％o<br>“int: {0:d};  hex: {0:x};  oct: {0:o};  bin: {0:b}”.format(42) # 比使用 % 格式化的方式多了处理二进制的符号<br>‘int: 42;  hex: 2a;  oct: 52;  bin: 101010’<br>“int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}”.format(42) # 显示十六进制，八进制，二进制的字首<br>‘int: 42;  hex: 0x2a;  oct: 0o52;  bin: 0b101010’<br>3.2.9 使用逗号作为千位分隔符<br>‘{:,}’.format(1234567890)<br>‘1,234,567,890’<br>3.2.10 显示百分比<br>points = 19<br>total = 22<br>‘Correct answers: {:.2%}’.format(points/total)<br>‘Correct answers: 86.36%’<br>3.2.11 使用特定类型格式<br>import datetime<br>d = datetime.datetime(2018, 7, 4, 12, 15, 58)<br>‘{:%Y-%m-%d %H:%M:%S}’.format(d)<br>‘2018-07-04 12:15:58’<br>3.2.12 嵌套参数和更复杂的例子<br>print(list(zip(‘&lt;^&gt;’, [‘left’, ‘center’, ‘right’])))<br>for align, text in zip(‘&lt;^&gt;’, [‘left’, ‘center’, ‘right’]):<br>    print(‘{0:{fill}{align}16}’.format(text, fill=align, align=align))    # {0} 中的 0 可有可无<br>[(‘&lt;’, ‘left’), (‘^’, ‘center’), (‘&gt;’, ‘right’)]<br>left&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>^^^^^center^^^^^</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>right<br>octets = [192, 168, 0, 1]<br>‘{:02X}{:02X}{:02X}{:02X}’.format(*octets) # 按照十六进制的方式显示。<br>‘C0A80001’<br>‘{:02X}’.format(192)<br>‘C0’<br>int(_, 16)<br>192<br>width = 5<br>for num in range(5,12):<br>    for base in ‘dXob’:  # 用于显示 5-11 的数字的十进制，十六进制，八进制和二进制。<br>        print(‘{0:{width}{base}}’.format(num, base=base, width=width), end=’ ‘)<br>    print()<br>5     5     5   101<br>    6     6     6   110<br>    7     7     7   111<br>    8     8    10  1000<br>    9     9    11  1001<br>   10     A    12  1010<br>   11     B    13  1011<br>4 字符串模板<br>class string.Template(template):<br>   ‘’’参数为字符串对象模板’’’<br>   substitute(mapping, <strong>kwds):<br>     ‘’’执行模板替换，返回一个新的字符串。映射是类似字典的对象，其键与模板中的占位符相匹配。’’’<br>   safe_substitute(mapping, </strong>kwds):<br>     ‘’’与 substitute() 功能类似，但会对占位符中的 $ 进行过滤，显示原始符号。’’’<br>from string import Template<br>s = Template(‘$who likes $what’)<br>s.substitute(who=’Tom’, what=’jerry’)<br>‘Tom likes jerry’<br>d = dict(who=’Tom’)<br>print(d)<br>Template(‘Give $who $100’).substitute(d) # 字符串模板中带有无效的 $ 占位符<br>{‘who’: ‘Tom’}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr>
+<p>ValueError                                Traceback (most recent call last)</p>
+<p> in ()<br>      1 d = dict(who=’Tom’)<br>      2 print(d)<br>—-&gt; 3 Template(‘Give $who $100’).substitute(d)</p>
+<p>/usr/lib/python3.6/string.py in substitute(<em>args, **kws)<br>    124             raise ValueError(‘Unrecognized named group in pattern’,<br>    125                              self.pattern)<br>–&gt; 126         return self.pattern.sub(convert, self.template)<br>    127<br>    128     def safe_substitute(</em>args, **kws):</p>
+<p>/usr/lib/python3.6/string.py in convert(mo)<br>    121                 return self.delimiter<br>    122             if mo.group(‘invalid’) is not None:<br>–&gt; 123                 self._invalid(mo)<br>    124             raise ValueError(‘Unrecognized named group in pattern’,<br>    125                              self.pattern)</p>
+<p>/usr/lib/python3.6/string.py in _invalid(self, mo)<br>     97             lineno = len(lines)<br>     98         raise ValueError(‘Invalid placeholder in string: line %d, col %d’ %<br>—&gt; 99                          (lineno, colno))<br>    100<br>    101     def substitute(*args, **kws):</p>
+<p>ValueError: Invalid placeholder in string: line 1, col 11</p>
+<h2 id="Template-‘-who-likes-what’-substitute-d-缺少-key-键值-what。"><a href="#Template-‘-who-likes-what’-substitute-d-缺少-key-键值-what。" class="headerlink" title="Template(‘$who likes $what’).substitute(d) # 缺少 key 键值 what。"></a>Template(‘$who likes $what’).substitute(d) # 缺少 key 键值 what。</h2><p>KeyError                                  Traceback (most recent call last)</p>
+<p> in ()<br>—-&gt; 1 Template(‘$who likes $what’).substitute(d)</p>
+<p>/usr/lib/python3.6/string.py in substitute(<em>args, **kws)<br>    124             raise ValueError(‘Unrecognized named group in pattern’,<br>    125                              self.pattern)<br>–&gt; 126         return self.pattern.sub(convert, self.template)<br>    127<br>    128     def safe_substitute(</em>args, **kws):</p>
+<p>/usr/lib/python3.6/string.py in convert(mo)<br>    117             named = mo.group(‘named’) or mo.group(‘braced’)<br>    118             if named is not None:<br>–&gt; 119                 return str(mapping[named])<br>    120             if mo.group(‘escaped’) is not None:<br>    121                 return self.delimiter</p>
+<p>KeyError: ‘what’<br>Template(‘$who likes $what’).safe_substitute(d)<br>‘Tom likes $what’<br>Template(‘Give $who $100’).safe_substitute(d)<br>‘Give Tom $100’<br>5 字符串函数<br>5.1 capitalize()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>该方法返回一个首字母大写的字符串。<br>str1 = “this is string example from <a href="http://www.os373.cn" target="_blank" rel="noopener">http://www.os373.cn</a> ……wow!!!”  # 请避免使用关键字 str 做变量名</p>
+<p>print (“str.capitalize() : “, str1.capitalize())</p>
+<p>str2 = “藕丝空间”</p>
+<p>print (“str.capitalize() : “, str2.capitalize()) # 针对英文书写格式。<br>str.capitalize() :  This is string example from <a href="http://www.os373.cn" target="_blank" rel="noopener">http://www.os373.cn</a> ……wow!!!<br>str.capitalize() :  藕丝空间<br>5.2 count(str, beg= 0,end=len(string))<br>参数</p>
+<p>sub – 搜索的子字符串<br>start – 字符串开始搜索的位置。默认为第一个字符,第一个字符索引值为0。<br>end – 字符串中结束搜索的位置。字符中第一个字符的索引为 0。默认为字符串的最后一个位置。<br>返回值</p>
+<p>该方法返回子字符串在字符串中出现的次数。<br>str1=”<a href="http://www.os373.cn&quot;" target="_blank" rel="noopener">http://www.os373.cn&quot;</a><br>sub=’o’<br>print (“str.count(‘o’) : “, str1.count(sub))</p>
+<p>sub=’os’<br>print (“str.count(‘run’, 0, 10) : “, str1.count(sub,0,10))<br>str.count(‘o’) :  1<br>str.count(‘run’, 0, 10) :  0<br>5.3 encode(encoding=”utf-8”, errors=”strict”)<br>参数</p>
+<p>encoding – 要使用的编码，如: UTF-8。<br>errors – 设置不同错误的处理方案。默认为 ‘strict’,意为编码错误引起一个UnicodeError。 其他可能得值有 ‘ignore’, ‘replace’, ‘xmlcharrefreplace’, ‘backslashreplace’ 以及通过 codecs.register_error() 注册的任何值。<br>返回值</p>
+<p>该方法返回编码后的字符串，它是一个 bytes 对象。<br>str1 = “藕丝空间”;<br>str_utf8 = str1.encode(“UTF-8”)<br>str_gbk = str1.encode(“GBK”)</p>
+<p>print(str1)</p>
+<p>print(“UTF-8 编码：”, str_utf8)<br>print(“GBK 编码：”, str_gbk)</p>
+<p>print(“UTF-8 解码：”, str_utf8.decode(‘UTF-8’,’strict’))<br>print(“GBK 解码：”, str_gbk.decode(‘GBK’,’strict’))<br>藕丝空间<br>UTF-8 编码： b’\xe8\x97\x95\xe4\xb8\x9d\xe7\xa9\xba\xe9\x97\xb4’<br>GBK 编码： b’\xc5\xba\xcb\xbf\xbf\xd5\xbc\xe4’<br>UTF-8 解码： 藕丝空间<br>GBK 解码： 藕丝空间<br>5.4 bytes.decode(encoding=”utf-8”, errors=”strict”)<br>decode() 方法以指定的编码格式解码 bytes 对象。默认编码为 ‘utf-8’。</p>
+<p>参数</p>
+<p>encoding – 要使用的编码，如”UTF-8”。<br>errors – 设置不同错误的处理方案。默认为 ‘strict’,意为编码错误引起一个UnicodeError。 其他可能得值有 ‘ignore’, ‘replace’, ‘xmlcharrefreplace’, ‘backslashreplace’ 以及通过 codecs.register_error() 注册的任何值。<br>返回值</p>
+<p>该方法返回解码后的字符串。<br>str1 = “藕丝空间”;<br>str_utf8 = str1.encode(“UTF-8”)<br>str_gbk = str1.encode(“GBK”)</p>
+<p>print(str1)</p>
+<p>print(“UTF-8 编码：”, str_utf8)<br>print(“GBK 编码：”, str_gbk)</p>
+<p>print(“UTF-8 解码：”, str_utf8.decode(‘UTF-8’,’strict’))<br>print(“GBK 解码：”, str_gbk.decode(‘GBK’,’strict’))<br>藕丝空间<br>UTF-8 编码： b’\xe8\x97\x95\xe4\xb8\x9d\xe7\xa9\xba\xe9\x97\xb4’<br>GBK 编码： b’\xc5\xba\xcb\xbf\xbf\xd5\xbc\xe4’<br>UTF-8 解码： 藕丝空间<br>GBK 解码： 藕丝空间<br>5.5 endswith(suffix, beg=0, end=len(string))<br>参数</p>
+<p>suffix – 该参数可以是一个字符串或者是一个元素。<br>beg – 字符串中的开始位置。<br>end – 字符中结束位置。<br>返回值</p>
+<p>如果字符串含有指定的后缀返回True，否则返回False。<br>str1=’ousi example….wow!!!’<br>suffix=’!!’<br>print (str1.endswith(suffix))<br>print (str1.endswith(suffix,20)) # 从索引 20 的位置开始<br>suffix1=’wow’<br>print (str1.endswith(suffix1))<br>print (str1.endswith(suffix1, 0, 19))<br>True<br>True<br>False<br>True</p>
+<ol>
+<li>6 startswith(prefix, beg=0,end=len(string))<br>参数</li>
+</ol>
+<p>prefix – 检测的字符串。<br>beg – 可选参数用于设置字符串检测的起始位置。<br>end – 可选参数用于设置字符串检测的结束位置。<br>返回值</p>
+<p>如果检测到字符串则返回True，否则返回False。<br>str1=’ousi example….wow!!!’<br>prefix=’ousi’<br>print (str1.startswith(prefix))<br>print (str1.startswith(prefix,20)) # 从索引 20 的位置开始<br>prefix1=’exam’<br>print (str1.startswith(prefix1))<br>print (str1.startswith(prefix1, 5, 19))<br>True<br>False<br>False<br>True<br>5.7 expandtabs(tabsize=8)<br>参数</p>
+<p>tabsize – 指定转换字符串中的 tab 符号(‘\t’)转为空格的字符数。<br>返回值</p>
+<p>该方法返回字符串中的 tab 符号(‘\t’)转为空格后生成的新字符串。<br>str1 = “this is\tstring example….wow!!!”</p>
+<p>print (“原始字符串: “ + str1)<br>print (“替换 \t 符号: “ +  str1.expandtabs())<br>print (“使用16个空格替换 \t 符号: “ +  str1.expandtabs(16))<br>原始字符串: this is  string example….wow!!!<br>替换 \t 符号: this is string example….wow!!!<br>使用16个空格替换 \t 符号: this is         string example….wow!!!<br>5.8 maketrans(intab, outtab)<br>用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</p>
+<p>两个字符串的长度必须相同，为一一对应的关系。</p>
+<p>注：Python3.4已经没有 string.maketrans() 了，取而代之的是内建函数: bytearray.maketrans()、bytes.maketrans()、str.maketrans()</p>
+<p>参数</p>
+<p>intab – 字符串中要替代的字符组成的字符串。<br>outtab – 相应的映射字符的字符串。<br>返回值</p>
+<p>返回字符串转换后生成的新字符串。<br>intab = “aeiou”<br>outtab = “12345”<br>trantab = str.maketrans(intab, outtab) # 任何一个<strong>已存在</strong>的字符串都可以触发 maketrans命令</p>
+<p>str1 = “this is string example….wow!!!”<br>print (str1.translate(trantab))<br>th3s 3s str3ng 2x1mpl2….w4w!!!<br>5.9 translate()<br>translate()方法语法：</p>
+<p>str.translate(table)<br>bytes.translate(table[, delete])<br>bytearray.translate(table[, delete])<br>参数</p>
+<p>table – 翻译表，翻译表是通过 maketrans() 方法转换而来。<br>deletechars – 字符串中要过滤的字符列表。<br>返回值</p>
+<p>返回翻译后的字符串,若给出了 delete 参数，则将原来的bytes中的属于delete的字符删除，剩下的字符 要按照table中给出的映射来进行映射 。<br>intab = “aeiou”<br>outtab = “12345”<br>trantab = str.maketrans(intab, outtab) # 任何一个<strong>已存在</strong>的字符串都可以触发 maketrans命令</p>
+<p>str1 = “this is string example….wow!!!”<br>print (str1.translate(trantab))</p>
+<h1 id="———–"><a href="#———–" class="headerlink" title="———–"></a>———–</h1><p>intab = “aeiou”.encode(“UTF-8”)<br>outtab = “12345”.encode(“UTF-8”)<br>trantab = bytes.maketrans(intab, outtab)</p>
+<p>str2 = “this is string example….wow!!!”;<br>str_utf8 = str2.encode(“UTF-8”)<br>print (str_utf8.translate(trantab, ‘wow’.encode(“UTF-8”)))<br>th3s 3s str3ng 2x1mpl2….w4w!!!<br>b’th3s 3s str3ng 2x1mpl2….!!!’<br>5.10 isalnum()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False<br>str1 = “” # 没有字符<br>print(str1.isalnum())</p>
+<p>str2 = “os373藕丝”  # 字符串没有空格<br>print (str2.isalnum())</p>
+<p>str3 = “<a href="http://www.os373.cn" target="_blank" rel="noopener">www.os373.cn</a> “ # 存在 . 和空格<br>print (str3.isalnum())<br>False<br>True<br>False<br>5.11 isalpha()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串至少有一个字符并且所有字符都是字母则返回 True,否则返回 False<br>str1 = “ousi”<br>print (str1.isalpha())</p>
+<p>str2 = “os373!”<br>print (str2.isalpha())<br>True<br>False<br>5.12 isdecimal()<br>isdecimal() 方法检查字符串是否只包含十进制字符。这种方法只存在于 unicode 对象（其它拉丁语言）。</p>
+<p>注意:定义一个十进制字符串，只需要在字符串前添加 ‘u’ 前缀即可。</p>
+<p>参数</p>
+<p>无<br>返回值</p>
+<p>如果字符串是否只包含十进制字符返回True，否则返回False。<br>str1 = “os373”<br>print (str1.isdecimal())</p>
+<p>str2 = “23443434”<br>print (str2.isdecimal())<br>False<br>True<br>5.13 isnumeric()<br>isnumeric() 方法检测字符串是否只由数字组成。这种方法是只针对 unicode 对象（其它拉丁语言）。</p>
+<p>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串中只包含数字字符，则返回 True，否则返回 False<br>str1 = “os373”<br>print (str1.isnumeric())</p>
+<p>str2 = “23443434”<br>print (str2.isnumeric())<br>False<br>True<br>5.14 isdigit()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串只包含数字则返回 True 否则返回 False。<br>str1 = “01001”;<br>print (str1.isdigit())</p>
+<p>str2 = “os373!!!”<br>print (str2.isdigit())<br>True<br>False<br>5.15 islower()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False<br>str1 = “os373.cn!!!”<br>print (str1.islower())</p>
+<p>str2 = “<a href="http://www.os373.cn\t!!!&quot;" target="_blank" rel="noopener">http://www.os373.cn\t!!!&quot;</a><br>print (str2.islower())</p>
+<p>str3 = “<a href="http://www.藕丝空间.cn!!!&quot;" target="_blank" rel="noopener">http://www.藕丝空间.cn!!!&quot;</a><br>print (str3.islower())</p>
+<p>str4 = “<a href="http://www.OS373.cn!!!&quot;" target="_blank" rel="noopener">http://www.OS373.cn!!!&quot;</a><br>print (str4.islower())<br>True<br>True<br>True<br>False<br>5.16 lower()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>返回将字符串中所有大写字符转换为小写后生成的字符串。<br>str1 = “OS373.CN!!!”<br>print (str1.lower())</p>
+<p>str2 = “<a href="http://WWW.os373.cn\t!!!&quot;" target="_blank" rel="noopener">http://WWW.os373.cn\t!!!&quot;</a><br>print (str2.lower())</p>
+<p>str3 = “<a href="http://WWW.藕丝空间.CN!!!&quot;" target="_blank" rel="noopener">http://WWW.藕丝空间.CN!!!&quot;</a><br>print (str3.lower())</p>
+<p>str4 = “<a href="http://WWW.OS373.cn!!!&quot;" target="_blank" rel="noopener">http://WWW.OS373.cn!!!&quot;</a><br>print (str4.lower())<br>os373.cn!!!<br><a href="http://www.os373.cn" target="_blank" rel="noopener">http://www.os373.cn</a> !!!<br><a href="http://www.藕丝空间.cn!!" target="_blank" rel="noopener">http://www.藕丝空间.cn!!</a>!<br><a href="http://www.os373.cn!!" target="_blank" rel="noopener">http://www.os373.cn!!</a>!<br>5.17 casefold()<br>lower() 只对 ASCII 也就是 ‘A-Z’有效，但是其它一些语言里面存在小写的情况就没办法了。文档里面举得例子是德语中’ß’的小写是’ss’（这个我也不懂）：</p>
+<p>s = ‘ß’<br>s.lower() #  ‘ß’<br>s.casefold() # ‘ss’<br>5.18 isupper()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False<br>str1 = “OS373.CN!!!”<br>print (str1.isupper())</p>
+<p>str2 = “<a href="http://WWW.os373.cn\t!!!&quot;" target="_blank" rel="noopener">http://WWW.os373.cn\t!!!&quot;</a><br>print (str2.isupper())</p>
+<p>str3 = “<a href="http://WWW.藕丝空间.CN!!!&quot;" target="_blank" rel="noopener">http://WWW.藕丝空间.CN!!!&quot;</a><br>print (str3.isupper())</p>
+<p>str4 = “<a href="http://WWW.OS373.cn!!!&quot;" target="_blank" rel="noopener">http://WWW.OS373.cn!!!&quot;</a><br>print (str4.isupper())<br>True<br>False<br>False<br>False<br>5.19 upper()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>返回小写字母转为大写字母的字符串。<br>str1 = “OS373.CN!!!”<br>print (str1.upper())</p>
+<p>str2 = “<a href="http://WWW.os373.cn\t!!!&quot;" target="_blank" rel="noopener">http://WWW.os373.cn\t!!!&quot;</a><br>print (str2.upper())</p>
+<p>str3 = “<a href="http://WWW.藕丝空间.CN!!!&quot;" target="_blank" rel="noopener">http://WWW.藕丝空间.CN!!!&quot;</a><br>print (str3.upper())</p>
+<p>str4 = “<a href="http://WWW.OS373.cn!!!&quot;" target="_blank" rel="noopener">http://WWW.OS373.cn!!!&quot;</a><br>print (str4.upper())<br>OS373.CN!!!<br>HTTP://WWW.OS373.CN !!!<br>HTTP://WWW.藕丝空间.CN!!!<br>HTTP://WWW.OS373.CN!!!<br>5.20 swapcase()<br>用于对字符串的大小写字母进行转换。</p>
+<p>参数</p>
+<p>无。<br>返回值</p>
+<p>返回大小写字母转换后生成的新字符串。<br>str1 = “OS373.CN!!!”<br>print (str1.swapcase())</p>
+<p>str2 = “<a href="http://WWW.os373.cn\t!!!&quot;" target="_blank" rel="noopener">http://WWW.os373.cn\t!!!&quot;</a><br>print (str2.swapcase())</p>
+<p>str3 = “<a href="http://WWW.藕丝空间.CN!!!&quot;" target="_blank" rel="noopener">http://WWW.藕丝空间.CN!!!&quot;</a><br>print (str3.swapcase())</p>
+<p>str4 = “<a href="http://WWW.OS373.cn!!!&quot;" target="_blank" rel="noopener">http://WWW.OS373.cn!!!&quot;</a><br>print (str4.swapcase())<br>os373.cn!!!<br>HTTP://<a href="http://www.OS373.CN" target="_blank" rel="noopener">www.OS373.CN</a> !!!<br>HTTP://www.藕丝空间.cn!!!<br>HTTP://<a href="http://www.os373.CN!!" target="_blank" rel="noopener">www.os373.CN!!</a>!<br>5.21 isspace()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串中只包含空格，则返回 True，否则返回 False.<br>str1 = “       “<br>print (str1.isspace())</p>
+<p>str2 = “藕丝空间     “<br>print (str2.isspace())<br>True<br>False<br>5.22　istitle()<br>检测字符串中所有的单词拼写首字母是否为大写，且其他字母为小写。</p>
+<p>参数</p>
+<p>无。<br>返回值</p>
+<p>如果字符串中所有的单词拼写首字母为大写，且其他字母为小写则返回 True，否则返回 False.<br>str1 = “This Is String Example…Wow!!!”<br>print (str1.istitle())</p>
+<p>str2 = “This is string example….wow!!!”<br>print (str2.istitle())<br>True<br>False<br>5.23 title()<br>参数</p>
+<p>无。<br>返回值</p>
+<p>返回”标题化”的字符串,就是说所有单词都是以大写开始，其它单词为小写。<br>str1 = “This IS StRING Example…Wow!!!”<br>print (str1.title())</p>
+<p>str2 = “This is string example….藕丝空间，wow!!!”<br>print (str2.title())<br>This Is String Example…Wow!!!<br>This Is String Example….藕丝空间，Wow!!!<br>5.24 join(seq)<br>参数</p>
+<p>sequence – 要连接的元素序列。<br>返回值</p>
+<p>返回通过指定字符连接序列中元素后生成的新字符串。<br>s1 = “-“<br>s2 = “”<br>s3 = “ “<br>seq = tuple(“os373.cn”) # 字符串序列<br>print (s1.join( seq ))<br>print (s2.join( seq ))<br>print (s3.join( seq ))<br>o-s-3-7-3-.-c-n<br>os373.cn<br>o s 3 7 3 . c n<br>5.25 center(width[, fillchar])<br>参数</p>
+<p>width – 字符串的总宽度。<br>fillchar – 填充字符。<br>返回值</p>
+<p>返回一个指定的宽度 width 且居中的字符串，如果 width 小于字符串宽度直接返回字符串，否则使用 fillchar 去填充。<br>str1 = “<a href="http://www.os373.cn&quot;" target="_blank" rel="noopener">http://www.os373.cn&quot;</a></p>
+<p>print (“str.center(40, ‘<em>‘) : “, str1.center(40, ‘</em>‘))<br>print (“str.center(10, ‘$’) : “, str1.center(10, ‘<em>‘))<br>str.center(40, ‘</em>‘) :  <strong><strong>**</strong></strong><a href="http://www.os373.cn**********" target="_blank" rel="noopener">http://www.os373.cn**********</a>*<br>str.center(10, ‘$’) :  <a href="http://www.os373.cn" target="_blank" rel="noopener">http://www.os373.cn</a><br>5.26 ljust(width[, fillchar])<br>参数</p>
+<p>width – 指定字符串长度。<br>fillchar – 填充字符，默认为空格。<br>返回值</p>
+<p>返回一个原字符串左对齐,并使用空格填充至指定长度的新字符串。如果指定的长度小于原字符串的长度则返回原字符串。<br>str1 = “<a href="http://www.os373.cn!!!&quot;" target="_blank" rel="noopener">http://www.os373.cn!!!&quot;</a></p>
+<p>print (str1.ljust(50, ‘*’))<br><a href="http://www.os373.cn!!!***************************" target="_blank" rel="noopener">http://www.os373.cn!!!***************************</a>*<br>5.27 rjust(width,[, fillchar])<br>参数</p>
+<p>width – 指定填充指定字符后中字符串的总长度.<br>fillchar – 填充的字符，默认为空格。<br>返回值</p>
+<p>返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串.<br>str = “<a href="http://www.os373.cn!!!&quot;" target="_blank" rel="noopener">http://www.os373.cn!!!&quot;</a></p>
+<p>print (str.rjust(50, ‘*’))<br><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong><a href="http://www.os373.cn!!" target="_blank" rel="noopener">http://www.os373.cn!!</a>!<br>5.28 zfill(width)<br>参数</p>
+<p>width – 指定字符串的长度。原字符串右对齐，前面填充 0。<br>返回值</p>
+<p>返回指定长度的字符串。<br>str = “<a href="http://www.os373.cn!!!&quot;" target="_blank" rel="noopener">http://www.os373.cn!!!&quot;</a></p>
+<p>print (str.zfill(50))<br>0000000000000000000000000000<a href="http://www.os373.cn!!" target="_blank" rel="noopener">http://www.os373.cn!!</a>!<br>5.29 find(str, beg=0 end=len(string))<br>参数</p>
+<p>str – 指定检索的字符串<br>beg – 开始索引，默认为0。<br>end – 结束索引，默认为字符串的长度。<br>返回值</p>
+<p>如果包含子字符串，返回开始的索引值，否则返回-1。<br>str1 = “os373 example….wow!!!”<br>str2 = “exam”;</p>
+<p>print (str1.find(str2))<br>print (str1.find(str2, 5))<br>print (str1.find(str2, 10))<br>6<br>6<br>-1<br>5.30 rfind(str, beg=0 end=len(string))<br>参数</p>
+<p>str – 查找的字符串<br>beg – 开始查找的位置，默认为0<br>end – 结束查找位置，默认为字符串的长度。<br>返回值</p>
+<p>返回字符串最后一次出现的位置，如果没有匹配项则返回-1。<br>str1 = “os373 example…. example wow!!!”<br>str2 = “exam”;</p>
+<p>print (str1.rfind(str2))<br>print (str1.rfind(str2, 5))<br>print (str1.rfind(str2, 20))<br>18<br>18<br>-1<br>5.31 index(str, beg=0, end=len(string))<br>参数</p>
+<p>str – 指定检索的字符串<br>beg – 开始索引，默认为0。<br>end – 结束索引，默认为字符串的长度。<br>返回值</p>
+<p>如果包含子字符串返回开始的索引值，否则抛出异常。<br>str1 = “os373 example….wow!!!”<br>str2 = “exam”;</p>
+<p>print (str1.index(str2))<br>print (str1.index(str2, 5))<br>print (str1.index(str2, 10))<br>6<br>6</p>
+<hr>
+<p>ValueError                                Traceback (most recent call last)</p>
+<p> in ()<br>      4 print (str1.index(str2))<br>      5 print (str1.index(str2, 5))<br>—-&gt; 6 print (str1.index(str2, 10))</p>
+<p>ValueError: substring not found<br>5.32 rindex(str, beg=0 end=len(string))<br>参数</p>
+<p>str – 查找的字符串<br>beg – 开始查找的位置，默认为0<br>end – 结束查找位置，默认为字符串的长度。<br>返回值</p>
+<p>返回子字符串 str 在字符串中最后出现的位置，如果没有匹配的字符串会报异常。<br>str1 = “os373 example….example wow!!!”<br>str2 = “exam”;</p>
+<p>print (str1.rindex(str2))<br>print (str1.rindex(str2, 5))<br>print (str1.rindex(str2, 20))<br>17<br>17</p>
+<hr>
+<p>ValueError                                Traceback (most recent call last)</p>
+<p> in ()<br>      4 print (str1.rindex(str2))<br>      5 print (str1.rindex(str2, 5))<br>—-&gt; 6 print (str1.rindex(str2, 20))</p>
+<p>ValueError: substring not found<br>5.33 max(str) 和 min(str)<br>str1 = “os373”<br>print(“最大字符: “ + max(str1)) # 返回字符串中最大的字符<br>print(“最小字符: “ + min(str1)) # 返回字符串中最小的字符<br>最大字符: s<br>最小字符: 3<br>5.34 lstrip([chars])<br>参数</p>
+<p>chars –指定截取的字符。<br>返回值</p>
+<p>返回截掉字符串左边的空格或指定字符后生成的新字符串。<br>str1 = “     this is string example….wow!!!     “;<br>print(str1.lstrip());<br>str2 = “88888888this is string example….wow!!!8888888”;<br>print(str2.lstrip(‘8’));<br>this is string example….wow!!!<br>this is string example….wow!!!8888888<br>5.35 rstrip([chars])<br>参数</p>
+<p>chars – 指定删除的字符（默认为空格）<br>返回值</p>
+<p>返回删除 string 字符串末尾的指定字符后生成的新字符串。<br>str1 = “     this is string example….wow!!!     “;<br>print(str1.rstrip());<br>str2 = “88888888this is string example….wow!!!8888888”;<br>print(str2.rstrip(‘8’));<br>this is string example….wow!!!<br>88888888this is string example….wow!!!<br>5.36 strip([chars])<br>参数</p>
+<p>chars – 移除字符串头尾指定的字符。<br>返回值</p>
+<p>返回移除字符串头尾指定的字符生成的新字符串。<br>str1 = “     this is string example….wow!!!     “;<br>print(str1.strip());<br>str2 = “88888888this is string example….wow!!!8888888”;<br>print(str2.strip(‘8’));<br>this is string example….wow!!!<br>this is string example….wow!!!<br>5.37 replace(old, new [, max])<br>参数</p>
+<p>old – 将被替换的子字符串。<br>new – 新字符串，用于替换old子字符串。<br>max – 可选字符串, 替换不超过 max 次<br>返回值</p>
+<p>返回字符串中的 old（旧字符串） 替换成 new(新字符串)后生成的新字符串，如果指定第三个参数max，则替换不超过 max 次。<br>str1 = “<a href="http://www.os373.com&quot;" target="_blank" rel="noopener">www.os373.com&quot;</a><br>print (“藕丝空间旧地址：”, str1)<br>print (“藕丝空间新地址：”, str1.replace(“com”, “cn”))</p>
+<p>str2 = “If you cover your mouth, the worry will run out of your eyes.”<br>print (str2.replace(“you”, “You”, 2)) # 只替换两次<br>藕丝空间旧地址： <a href="http://www.os373.com" target="_blank" rel="noopener">www.os373.com</a><br>藕丝空间新地址： <a href="http://www.os373.cn" target="_blank" rel="noopener">www.os373.cn</a><br>If You cover Your mouth, the worry will run out of your eyes.<br>5.38 split(str=””, num=string.count(str))<br>参数</p>
+<p>str – 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。<br>num – 分割次数。<br>返回值</p>
+<p>返回分割后的字符串列表。<br>str1 = “this is string \r example\n….wow!!!”<br>print (str1.split())<br>print (str1.split(‘i’,1))<br>print (str1.split(‘w’))<br>[‘this’, ‘is’, ‘string’, ‘example’, ‘….wow!!!’]<br>[‘th’, ‘s is string \r example\n….wow!!!’]<br>[‘this is string \r example\n….’, ‘o’, ‘!!!’]<br>5.39 splitlines([keepends])<br>参数</p>
+<p>keepends – 在输出结果里是否去掉换行符(‘\r’, ‘\r\n’, \n’)，默认为 False，不包含换行符，如果为 True，则保留换行符。<br>返回值</p>
+<p>返回一个包含各行作为元素的列表。<br>str1 = ‘ab c\n\nde fg\rkl\r\n’<br>print(str1.splitlines())<br>print(str1.splitlines(True))<br>[‘ab c’, ‘’, ‘de fg’, ‘kl’]<br>[‘ab c\n’, ‘\n’, ‘de fg\r’, ‘kl\r\n’]<br><!--more--></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wxjs.jpg" alt="JayJZ wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅健身小助手！</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/基础/" rel="tag"><i class="fa fa-tag"></i> 基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/18/纠正体态-圆肩/" rel="next" title="纠正体态-圆肩">
+                <i class="fa fa-chevron-left"></i> 纠正体态-圆肩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://oyvgzaycw.bkt.clouddn.com/23498821_1911440002505746_3982309632654704640_n.jpg"
+                alt="JayJZ" />
+            
+              <p class="site-author-name" itemprop="name">JayJZ</p>
+              <p class="site-description motion-element" itemprop="description">爆肝人生，你我同在</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#print-str1"><span class="nav-number">1.</span> <span class="nav-text">print(str1)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#print-str2"><span class="nav-number">1.1.</span> <span class="nav-text">print(str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template-‘-who-likes-what’-substitute-d-缺少-key-键值-what。"><span class="nav-number">1.2.</span> <span class="nav-text">Template(‘$who likes $what’).substitute(d) # 缺少 key 键值 what。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#———–"><span class="nav-number">2.</span> <span class="nav-text">———–</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JayJZ</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://j2jhexo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/04/20/python字符串/';
+          this.page.identifier = '2018/04/20/python字符串/';
+          this.page.title = 'python字符串';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://j2jhexo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
