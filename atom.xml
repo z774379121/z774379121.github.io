@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-20T06:05:22.300Z</updated>
+  <updated>2018-07-28T01:38:12.826Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>go编程之面向接口</title>
+    <link href="http://yoursite.com/2018/07/18/go%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2018/07/18/go编程之面向接口/</id>
+    <published>2018-07-18T01:32:08.000Z</published>
+    <updated>2018-07-28T01:38:12.826Z</updated>
+    
+    <content type="html"><![CDATA[<p>接触golang这门语言差不多有3个多月了。初上手时,光语法带给我的感觉和python很像,但又带点java的影子,接触了一段时间之后，逐渐发现这门语言的有趣之处,其中的面向接口编程算是较明显的一点。<br><a id="more"></a><br>接口这概念在java中就有存在,作用是定义了一个对象的（一组）行为。只不过在Java中要显式实现,golang中是隐式实现的方法。这方面想必大家都有了解,网上的资料也很多,这里就不多说了,倒是要提提<strong>接口型函数</strong>这个概念。</p><p>接口型函数是指用函数实现接口,不过只适用于只有单个方法的接口。</p><p>首先是一段简单的代码,交代了接口的用途</p><pre><code>type Handler interface {    DoSomeThing(foo, bar interface{})}func Each(m map[interface{}]interface{}, h Handler) {if m != nil &amp;&amp; len(m) &gt; 0 {    for k, v := range m {        h.DoSomeThing(k, v)    }}} </code></pre><p>这边定义了一个接口,只有一个方法DoSomething,下边有个Each函数,接收2个参数,一个是任意Key,Value的映射（字典）,另一个就是实现了Handler接口的对象,函数的作用也很简单：DoSomething的调用,函数内的具体功能实现由我们定义。</p><p>下面的例子就简单定义了DoSomeThing,以及Each函数的调用。</p><pre><code>type welcome stringfunc (w welcome) DoSomeThing(k, v interface{}) {    fmt.Printf(&quot;%s,我叫%s,今年%d岁\n&quot;, w,k, v)}func main() {    persons := make(map[interface{}]interface{})    persons[&quot;张三&quot;] = 20    persons[&quot;李四&quot;] = 23    persons[&quot;王五&quot;] = 26    var w welcome = &quot;大家好&quot;    Each(persons, w)}</code></pre><p>字典中存放了人名和年龄,通过Each函数传入,并通过调用实现了Handler接口的welcome绑定的DoSomeThing方法打印出来结果。</p><p>以上实现也没什么大问题,只是有2个约束：</p><ol><li>必须要先将接口方法实现绑定到一个类型中,如上述例子中的先声明的type welcome string</li><li>DoSomeThing的定义名字不能修改,一旦修改接口实现便不成立。也无法根据实际情况灵活命名, 固定的一个方法名无法成功表意。</li></ol><p>关于第二个问题,我们可以这样做,定义一个函数,其类型与接口方法一致（参数，返回值都一致）。</p><pre><code>type HandlerFunc func(k, v interface{})func (f HandlerFunc) DoSomeThing(k, v interface{}){    f(k,v)}</code></pre><p>那么,最初的代码可以改为:</p><pre><code>type welcome stringtype HandlerFunc func(k, v interface{})func (f HandlerFunc) DoSomeThing(k, v interface{}){    f(k,v)}func (w welcome) selfInfo(k, v interface{}){ fmt.Printf(&quot;%s,我叫%s,今年%d岁\n&quot;, w,k, v)}func main() {    persons := make(map[interface{}]interface{})    persons[&quot;张三&quot;] = 20    persons[&quot;李四&quot;] = 23    persons[&quot;王五&quot;] = 26    var w welcome = &quot;大家好&quot;    Each(persons, HandlerFunc(w.selfInfo))}</code></pre><p>其中HandlerFunc(w.selfInfo),不是调用HandlerFunc这个方法,而是转化w.xxxxx函数为定义的HandlerFunc函数类型,相当于string（12）,而HandlerFunc又实现了Handler接口,符合Each的参数定义。w.xxxx里的xxxx可以随时修改为有意义的名字,并且的调用时展示出来。</p><p>接着解决第一个问题：</p><pre><code>func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) {    Each(m,HandlerFunc(f))}type welcome stringfunc (w welcome) selfInfo(k, v interface{}) {    fmt.Printf(&quot;%s,我叫%s,今年%d岁\n&quot;, w,k, v)}func main() {    persons := make(map[interface{}]interface{})    persons[&quot;张三&quot;] = 20    persons[&quot;李四&quot;] = 23    persons[&quot;王五&quot;] = 26    var w welcome = &quot;大家好&quot;    EachFunc(persons, w.selfInfo)}</code></pre><p>先是包装了下Each(persons, HandlerFunc(w.selfInfo)) 中的强制转换过程, 发现f参数是个函数类型, 那么便可以去掉type welcome string,进一步精简流程。</p><pre><code>func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) {    Each(m,HandlerFunc(f))}func selfInfo(k, v interface{}) {    fmt.Printf(&quot;%s,我叫%s,今年%d岁\n&quot;, w,k, v)}func main() {    persons := make(map[interface{}]interface{})    persons[&quot;张三&quot;] = 20    persons[&quot;李四&quot;] = 23    persons[&quot;王五&quot;] = 26    EachFunc(persons, selfInfo)}</code></pre><p>那么只需要定义好一个与接口方法相同的具体实现函数与type func 即可,不需要绑定到特定的对象,因为可以通过函数HandlerFunc强制转换过去。<br>下面是完整的代码</p><pre><code>type HandlerFunc func(k, v interface{})func (f HandlerFunc) DoSomeThing(k, v interface{}){    f(k,v)}func Each(m map[interface{}]interface{}, h Handler) {    if m != nil &amp;&amp; len(m) &gt; 0 {        for k, v := range m {            h.Do(k, v)        }    }}func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) {    Each(m,HandlerFunc(f))}func selfInfo(k, v interface{}) {    fmt.Printf(&quot;%s,我叫%s,今年%d岁\n&quot;, w,k, v)}func main() {    persons := make(map[interface{}]interface{})    persons[&quot;张三&quot;] = 20    persons[&quot;李四&quot;] = 23    persons[&quot;王五&quot;] = 26    EachFunc(persons, selfInfo)}</code></pre><p>此时只需关注selfInfo类函数的实现与命名即可,便可完成<br>EachFunc(persons, playGame) //玩游戏<br>EachFunc(persons, chat) //聊天</p><p>http.Handler源码中就有这种技巧的体现,Handle相当于Each, HandleFunc相当于EachFunc</p><pre><code>type Handler interface {    ServeHTTP(ResponseWriter, *Request)}func Handle(pattern string, handler Handler) {    DefaultServeMux.Handle(pattern, handler)}func HandleFunc(pattern string, handler func(ResponseWriter,*Request)){    DefaultServeMux.HandleFunc(pattern, handler)}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接触golang这门语言差不多有3个多月了。初上手时,光语法带给我的感觉和python很像,但又带点java的影子,接触了一段时间之后，逐渐发现这门语言的有趣之处,其中的面向接口编程算是较明显的一点。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="编程" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>python字符串</title>
